@@ -1,0 +1,61 @@
+# ===== Next.js / React / Node =====
+node_modules/
+.pnp/
+.pnp.cjs
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# ===== Env / Secrets =====
+.env
+.env.*
+!.env.example
+
+# ===== OS / Editor junk =====
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+.idea/
+*.iml
+
+# ===== Logs =====
+logs/
+*.log
+
+# ===== Coverage / Tests =====
+coverage/
+.nyc_output/
+
+# ===== Cache =====
+.cache/
+.turbo/
+.vercel/
+.eslintcache
+.stylelintcache
+
+# ===== TypeScript / Misc =====
+*.swp
+*.swo
+*.swn
+*.tmp
+*.temp
+
+# ===== Local-only =====
+*.local
+out/**
