@@ -10,15 +10,15 @@ landing page.
 
 ## Project Links
 
-- **Deployed site**: TODO - add the production URL when deployment is confirmed.
+- **Deployed site**: <https://www.rep-os.dev>
 - **CLI source**: <https://github.com/trifactoria/repos-cli>
 - **PyPI package**: <https://pypi.org/project/repos-cli/>
 
 ## Screenshot
 
-TODO - add a current screenshot after deployment or after generating a local
-production build. Suggested path: `public/screenshot.png`, then reference it from
-this section and from any social preview metadata.
+![RepOS terminal interface](screenshots/repos-cli-terminal.png)
+
+RepOS running as a multi-panel database-backed command environment with panel switching, aliases, and workflow-oriented terminal organization.
 
 ## Quick Start
 
