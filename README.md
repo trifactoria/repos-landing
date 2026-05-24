@@ -1,33 +1,67 @@
 # RepOS Landing Page
 
-A single-page Next.js site for RepOS — the multi-panel, database-backed command environment.
+This repository contains the RepOS landing page, a static Next.js site for the
+[`repos-cli`](https://github.com/trifactoria/repos-cli) Python package. The site
+explains RepOS, links to the GitHub repository and PyPI package, and provides a
+lightweight install-focused entry point for users evaluating the CLI.
+
+RepOS itself lives in `repos-cli`; this repository only contains the public
+landing page.
+
+## Project Links
+
+- **Deployed site**: TODO - add the production URL when deployment is confirmed.
+- **CLI source**: <https://github.com/trifactoria/repos-cli>
+- **PyPI package**: <https://pypi.org/project/repos-cli/>
+
+## Screenshot
+
+TODO - add a current screenshot after deployment or after generating a local
+production build. Suggested path: `public/screenshot.png`, then reference it from
+this section and from any social preview metadata.
 
 ## Quick Start
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Run development server
-npm run dev
+pnpm dev
 
 # Build for production (outputs to /out)
-npm run build
+pnpm build
 ```
+
+This repo uses `pnpm`; keep dependency changes aligned with `pnpm-lock.yaml`.
+
+## Build and Lint
+
+```bash
+# TypeScript/lint-style project check
+pnpm lint
+
+# Static export build
+pnpm build
+```
+
+The previous `next lint` command is not compatible with the Next.js 15 version
+resolved in `pnpm-lock.yaml`, so `pnpm lint` runs `tsc --noEmit` for the current
+project check.
 
 ## Deployment
 
 This site is configured for static export, making it easy to deploy anywhere:
 
-- **GitHub Pages**: Push the `out` folder contents to `gh-pages` branch
-- **Netlify**: Build command `npm run build`, publish directory `out`
+- **GitHub Pages**: Push the `out` folder contents to the `gh-pages` branch
+- **Netlify**: Build command `pnpm build`, publish directory `out`
 - **Vercel**: Auto-detects Next.js
 - **Any static host**: Upload contents of `out` folder
 
 ## Project Structure
 
 ```
-repos-site/
+repos-landing/
 ├── app/
 │   ├── globals.css    # Tailwind + custom styles
 │   ├── layout.tsx     # Root layout with metadata
@@ -36,6 +70,7 @@ repos-site/
 │   └── logo.png       # RepOS logo
 ├── next.config.ts     # Next.js config (static export)
 ├── package.json
+├── pnpm-lock.yaml
 └── tsconfig.json
 ```
 

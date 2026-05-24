@@ -57,8 +57,9 @@ export default function Home() {
 
           <div className="space-y-5 text-[#C8C8C8] opacity-0 animate-fade-in animation-delay-400">
             <p className="text-sm md:text-base leading-relaxed">
-              RepOS is a CLI-first environment for managing your personal command workflows.
-              Commands are organized by <span className="text-[#5DD3D3]">panel</span>{' '}
+              This site is the landing page for the <span className="text-[#F5C842]">repos-cli</span>{' '}
+              Python package. RepOS is a CLI-first environment for managing your personal command
+              workflows. Commands are organized by <span className="text-[#5DD3D3]">panel</span>{' '}
               <span className="text-[#8B9199]">(Git, Docker, Python, etc.)</span>, persisted locally,
               and replayable across sessions.
             </p>

@@ -3,12 +3,12 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'RepOS | Multi-Panel Command Environment',
-  description: 'A multi-panel, database-backed command environment for developers who work in the terminal. Store aliases, switch contexts, and reuse real commands — without shell sprawl.',
-  keywords: ['CLI', 'terminal', 'command line', 'aliases', 'developer tools', 'productivity'],
+  description: 'Landing page for repos-cli, a multi-panel, database-backed command environment for developers who work in the terminal.',
+  keywords: ['repos-cli', 'CLI', 'terminal', 'command line', 'aliases', 'developer tools', 'productivity'],
   authors: [{ name: 'TriFactoria Labs' }],
   openGraph: {
     title: 'RepOS | Multi-Panel Command Environment',
-    description: 'A multi-panel, database-backed command environment for developers who work in the terminal.',
+    description: 'Landing page for repos-cli, a multi-panel, database-backed command environment for developers who work in the terminal.',
     type: 'website',
   },
 };
