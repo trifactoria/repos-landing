@@ -1,78 +1,125 @@
 # RepOS Landing Page
 
-This repository contains the RepOS landing page, a static Next.js site for the
-[`repos-cli`](https://github.com/trifactoria/repos-cli) Python package. The site
-explains RepOS, links to the GitHub repository and PyPI package, and provides a
-lightweight install-focused entry point for users evaluating the CLI.
+Landing page for the `repos-cli` Python package.
 
-RepOS itself lives in `repos-cli`; this repository only contains the public
-landing page.
+RepOS is a terminal-first command workspace designed for developers who live in the shell. It helps organize repeatable commands into panels, persist workflows locally, and reduce shell alias sprawl without turning dotfiles into the source of truth.
 
-## Project Links
+This repository contains the public-facing Next.js landing page only.
 
-- **Deployed site**: <https://www.rep-os.dev>
-- **CLI source**: <https://github.com/trifactoria/repos-cli>
-- **PyPI package**: <https://pypi.org/project/repos-cli/>
+The actual CLI lives here:
 
-## Screenshot
+- https://github.com/trifactoria/repos-cli
+
+## Live Site
+
+- https://rep-os.dev
+
+## Related Links
+
+- GitHub: https://github.com/trifactoria/repos-cli
+- PyPI: https://pypi.org/project/repos-cli/
+
+## Screenshots
+
+### RepOS Terminal Interface
 
 ![RepOS terminal interface](screenshots/repos-cli-terminal.png)
 
-RepOS running as a multi-panel database-backed command environment with panel switching, aliases, and workflow-oriented terminal organization.
+### Landing Page
 
-## Quick Start
+![RepOS landing page](screenshots/repos-landing.png)
+
+## Features
+
+- Multi-panel command organization
+- Persistent local workflow storage
+- Reusable aliases without shell sprawl
+- Global or project-scoped command databases
+- Terminal-native workflow design
+- Static export deployment
+
+## Development
+
+Install dependencies:
 
 ```bash
-# Install dependencies
 pnpm install
-
-# Run development server
-pnpm dev
-
-# Build for production (outputs to /out)
-pnpm build
 ```
 
-This repo uses `pnpm`; keep dependency changes aligned with `pnpm-lock.yaml`.
-
-## Build and Lint
+Run development server:
 
 ```bash
-# TypeScript/lint-style project check
-pnpm lint
+pnpm dev
+```
 
-# Static export build
+Build production export:
+
+```bash
 pnpm build
 ```
 
-The previous `next lint` command is not compatible with the Next.js 15 version
-resolved in `pnpm-lock.yaml`, so `pnpm lint` runs `tsc --noEmit` for the current
-project check.
+Run project checks:
+
+```bash
+pnpm lint
+```
+
+## Stack
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Static export deployment
 
 ## Deployment
 
-This site is configured for static export, making it easy to deploy anywhere:
+The site exports statically and can be deployed to:
 
-- **GitHub Pages**: Push the `out` folder contents to the `gh-pages` branch
-- **Netlify**: Build command `pnpm build`, publish directory `out`
-- **Vercel**: Auto-detects Next.js
-- **Any static host**: Upload contents of `out` folder
+- Vercel
+- Netlify
+- GitHub Pages
+- Any static hosting provider
+
+Production output is generated in:
+
+```text
+out/
+```
 
 ## Project Structure
 
-```
+```text
 repos-landing/
 ├── app/
-│   ├── globals.css    # Tailwind + custom styles
-│   ├── layout.tsx     # Root layout with metadata
-│   └── page.tsx       # Main page component
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
 ├── public/
-│   └── logo.png       # RepOS logo
-├── next.config.ts     # Next.js config (static export)
+│   ├── logo.png
+│   └── screenshots/
+├── screenshots/
+├── next.config.ts
 ├── package.json
 ├── pnpm-lock.yaml
 └── tsconfig.json
 ```
+
+## Design Direction
+
+The landing page intentionally uses:
+
+- terminal-inspired typography
+- neon accent colors
+- decorative CLI-style separators
+- dark workstation aesthetics
+- lightweight static delivery
+
+## Notes
+
+- Analytics are optional and environment-gated.
+- The site is intentionally static and lightweight.
+- `repos-cli` itself is maintained in the separate CLI repository.
 
 ## Colors
 
@@ -90,5 +137,5 @@ From the RepOS logo:
 
 ## Fonts
 
-- **JetBrains Mono** — Terminal aesthetic for all text
+- JetBrains Mono
 - Loaded via Google Fonts CDN

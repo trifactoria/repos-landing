@@ -1,205 +1,453 @@
-'use client';
-
 import Image from 'next/image';
+import type { ReactNode } from 'react';
+
+const features = [
+  {
+    title: 'Command Panels',
+    text: 'Group the commands you reach for by working context.',
+    color: 'text-[#5DD3D3]',
+    icon: <PanelsIcon />,
+  },
+  {
+    title: 'Reusable Aliases',
+    text: 'Keep familiar shortcuts close without expanding shell sprawl.',
+    color: 'text-[#F5C842]',
+    icon: <CodeIcon />,
+  },
+  {
+    title: 'Saved Workflows',
+    text: 'Bring useful command sets back across terminal sessions.',
+    color: 'text-[#D63384]',
+    icon: <CloudIcon />,
+  },
+  {
+    title: 'Global Or Project Scope',
+    text: 'Use RepOS broadly, or keep a workflow tied to one repo.',
+    color: 'text-[#5DD3D3]',
+    icon: <GlobeIcon />,
+  },
+];
+
+const architecture = [
+  {
+    title: 'CLI Native',
+    text: 'A Python CLI that stays in the flow of terminal work.',
+    color: 'text-[#5DD3D3]',
+    icon: <TerminalIcon />,
+  },
+  {
+    title: 'Panel Based',
+    text: 'Related commands stay grouped, scannable, and ready to run.',
+    color: 'text-[#F5C842]',
+    icon: <LayoutIcon />,
+  },
+  {
+    title: 'Persistent',
+    text: 'Useful workflows survive beyond scrollback and shell history.',
+    color: 'text-[#D63384]',
+    icon: <DatabaseIcon />,
+  },
+];
+
+const roadmap = [
+  'Sharper panel navigation for larger command sets.',
+  'Smoother handoff between global and project scopes.',
+  'Faster setup for common developer stacks.',
+  'Better command discovery without hiding the terminal.',
+];
+
+function SectionHeading({ children, color = 'text-[#D63384]' }: { children: ReactNode; color?: string }) {
+  return (
+    <h2 className={`mb-5 flex items-center gap-3 text-base font-semibold md:text-lg ${color}`}>
+      <span className="font-normal text-[#F5C842]">{'>'}</span>
+      {children}
+    </h2>
+  );
+}
+
+function TerminalBlock({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return (
+    <pre
+      className={`overflow-x-auto rounded-lg border border-[#3D4451] bg-[#141A21]/80 p-4 text-sm leading-relaxed text-[#E8E8E8] shadow-[0_16px_48px_rgba(0,0,0,0.22)] ${className}`}
+    >
+      <code>{children}</code>
+    </pre>
+  );
+}
+
+function SectionSeparator({ align = 'left' }: { align?: 'left' | 'center' | 'right' }) {
+  return (
+    <div className="mx-auto w-full max-w-5xl px-6">
+      <div className="flex items-center gap-4">
+        {align !== 'left' && <div className="h-px flex-1 bg-[#3D4451]" />}
+        <div className="flex gap-1.5" aria-hidden="true">
+          {align === 'center' ? (
+            <>
+              <span className="h-2.5 w-2.5 rounded-full bg-[#F5C842]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#D63384]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#5DD3D3]" />
+            </>
+          ) : align === 'right' ? (
+            <>
+              <span className="h-2.5 w-2.5 rounded-full bg-[#5DD3D3]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#F5C842]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#D63384]" />
+            </>
+          ) : (
+            <>
+              <span className="h-2.5 w-2.5 rounded-full bg-[#D63384]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#5DD3D3]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#F5C842]" />
+            </>
+          )}
+        </div>
+        {align !== 'right' && <div className="h-px flex-1 bg-[#3D4451]" />}
+      </div>
+    </div>
+  );
+}
+
+function IconFrame({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <div className={`mb-4 h-8 w-8 ${className}`}>{children}</div>;
+}
+
+function GitHubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+      <path
+        fillRule="evenodd"
+        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+function PanelsIcon() {
+  return (
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+      <rect x="6" y="8" width="12" height="10" rx="1.5" />
+      <rect x="22" y="8" width="12" height="10" rx="1.5" />
+      <rect x="6" y="22" width="12" height="10" rx="1.5" />
+      <rect x="22" y="22" width="12" height="10" rx="1.5" />
+    </svg>
+  );
+}
+
+function CodeIcon() {
+  return (
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M16 10 8 20l8 10" />
+      <path d="M24 10 32 20 24 30" />
+      <path d="m22 7-4 26" />
+    </svg>
+  );
+}
+
+function CloudIcon() {
+  return (
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M13 29h16a7 7 0 0 0 .5-14A10 10 0 0 0 10 17a6 6 0 0 0 3 12Z" />
+    </svg>
+  );
+}
+
+function GlobeIcon() {
+  return (
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="20" cy="20" r="14" />
+      <path d="M6 20h28" />
+      <path d="M20 6c4 4 6 8.5 6 14s-2 10-6 14c-4-4-6-8.5-6-14s2-10 6-14Z" />
+    </svg>
+  );
+}
+
+function TerminalIcon() {
+  return (
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="7" y="9" width="26" height="22" rx="2" />
+      <path d="m13 17 5 4-5 4" />
+      <path d="M21 25h7" />
+    </svg>
+  );
+}
+
+function LayoutIcon() {
+  return (
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="7" y="9" width="26" height="22" rx="2" />
+      <path d="M7 17h26" />
+      <path d="M17 17v14" />
+    </svg>
+  );
+}
+
+function DatabaseIcon() {
+  return (
+    <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <ellipse cx="20" cy="11" rx="11" ry="4" />
+      <path d="M9 11v18c0 2.2 4.9 4 11 4s11-1.8 11-4V11" />
+      <path d="M9 20c0 2.2 4.9 4 11 4s11-1.8 11-4" />
+    </svg>
+  );
+}
+
+function HomeIcon() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 15 16 6l11 9" />
+      <path d="M8 14v12h16V14" />
+    </svg>
+  );
+}
+
+function RocketIcon() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M18 20c5-2 8-7 8-14-7 0-12 3-14 8L6 20l6-1 1 6 5-5Z" />
+      <path d="M19 9h.01" />
+      <path d="M8 23l-3 3" />
+    </svg>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#2D3239] text-white flex flex-col">
-      {/* Hero Section */}
-      <header className="mx-auto w-full max-w-3xl px-6 py-12 md:py-16">
-        <div className="flex flex-col items-center text-center">
-          {/* Logo banner */}
-          <div className="w-full max-w-[620px] rounded-2xl bg-white p-4">
-            <Image
-              src="/logo.png"
-              alt="RepOS"
-              width={1400}
-              height={420}
-              priority
-              className="h-auto w-full"
-            />
+    <main className="min-h-screen bg-[#2D3239] text-[#E8E8E8]">
+      <header className="mx-auto w-full max-w-5xl px-6 pb-10 pt-6 md:pb-12">
+        <nav className="mb-7 flex items-center justify-between gap-4 text-xs text-[#E8E8E8]">
+          <a href="#top" className="text-[#5DD3D3] hover:text-[#E8E8E8]">
+            repos-cli
+          </a>
+          <div className="flex items-center gap-5 md:gap-8">
+            <a href="#workflow" className="hover:text-[#5DD3D3]">
+              workflow
+            </a>
+            <a href="#architecture" className="hover:text-[#5DD3D3]">
+              architecture
+            </a>
+            <a href="#get" className="hover:text-[#5DD3D3]">
+              install
+            </a>
+          </div>
+        </nav>
+
+        <div id="top">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-[#3D4451] bg-[#141A21]/70 px-3 py-2 text-xs text-[#E8E8E8] shadow-[0_12px_36px_rgba(0,0,0,0.18)]">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#D63384]" />
+            <span>Python package for terminal workflows</span>
           </div>
 
-          {/* Tagline */}
-          <h1 className="mt-10 text-lg md:text-xl lg:text-2xl font-normal mb-5 max-w-3xl leading-relaxed opacity-0 animate-fade-in animation-delay-100">
-            A multi-panel, database-backed command environment
-            <br className="hidden md:block" />
-            <span className="text-[#8B9199]"> for developers who work in the terminal.</span>
-          </h1>
+          <div className="mb-8 rounded-xl bg-white p-4 shadow-[0_22px_80px_rgba(0,0,0,0.32)] md:p-7">
+            <Image src="/logo.png" alt="RepOS" width={814} height={276} priority className="mx-auto h-auto w-full max-w-3xl" />
+          </div>
 
-          {/* Clarifier */}
-          <p className="text-[#5DD3D3] text-sm md:text-base max-w-2xl leading-relaxed opacity-0 animate-fade-in animation-delay-200">
-            <span className="text-[#F5C842] mr-2">▸</span>
-            Store aliases, switch contexts, and reuse real commands — without shell sprawl.
-          </p>
+          <div className="grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
+            <div>
+              <h1 className="max-w-md text-3xl font-normal leading-[1.55] md:text-[2.45rem]">
+                A cleaner command center for developers who live in the{' '}
+                <span className="text-[#D63384]">terminal.</span>
+              </h1>
+
+              <p className="mt-5 max-w-md text-sm leading-7 text-[#C8C8C8]">
+                Organize repeatable commands, save aliases, and switch contexts without turning
+                dotfiles into a command database.
+              </p>
+
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <a
+                  href="https://pypi.org/project/repos-cli/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 w-full items-center justify-center rounded-lg border border-[#F5C842]/80 bg-[#F5C842] px-5 text-sm font-semibold text-[#2D3239] shadow-[0_12px_34px_rgba(245,200,66,0.16)] hover:border-[#F5C842] hover:bg-[#f7d45f] sm:w-[13.25rem]"
+                >
+                  <span className="mr-2 text-[#2D3239]/75">{'>'}</span>
+                  pip install repos-cli
+                </a>
+                <a
+                  href="https://github.com/trifactoria/repos-cli"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-[#5DD3D3]/70 bg-[#141A21]/70 px-5 text-sm font-semibold text-[#5DD3D3] hover:bg-[#5DD3D3] hover:text-[#2D3239] sm:w-[10.75rem]"
+                >
+                  <GitHubIcon />
+                  View source
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-[#64707f]/70 bg-[#10161D]/85 p-2 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+              <div className="flex items-center gap-2 border-b border-[#3D4451] px-3 py-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#D63384]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#F5C842]" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#5DD3D3]" />
+                <span className="ml-2 text-xs text-[#C8C8C8]">repos-cli terminal</span>
+              </div>
+              <Image
+                src="/screenshots/repos-cli-terminal.png"
+                alt="RepOS terminal interface showing panels and command workflow organization"
+                width={1246}
+                height={1007}
+                priority
+                className="mt-2 h-auto w-full rounded"
+              />
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* Divider */}
-      <div className="mx-auto w-full max-w-3xl px-6">
-        <div className="flex items-center gap-4 opacity-0 animate-fade-in animation-delay-300">
-          <div className="flex gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#D63384]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#5DD3D3]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#F5C842]" />
-          </div>
-          <div className="flex-1 h-px bg-[#3D4451]" />
-        </div>
-      </div>
+      <SectionSeparator />
 
-      {/* What It Does Section */}
-      <section className="mx-auto w-full max-w-3xl px-6 py-12 md:py-16">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-[#D63384] text-base md:text-lg mb-7 flex items-center gap-3 font-medium opacity-0 animate-fade-in animation-delay-300">
-            <span className="text-[#F5C842] font-normal">{'>'}</span>
-            What It Does
-          </h2>
-
-          <div className="space-y-5 text-[#C8C8C8] opacity-0 animate-fade-in animation-delay-400">
-            <p className="text-sm md:text-base leading-relaxed">
-              This site is the landing page for the <span className="text-[#F5C842]">repos-cli</span>{' '}
-              Python package. RepOS is a CLI-first environment for managing your personal command
-              workflows. Commands are organized by <span className="text-[#5DD3D3]">panel</span>{' '}
-              <span className="text-[#8B9199]">(Git, Docker, Python, etc.)</span>, persisted locally,
-              and replayable across sessions.
-            </p>
-
-            <p className="text-sm md:text-base leading-relaxed">
-              RepOS is designed to be{' '}
-              <span className="text-[#F5C842]">fast</span>,{' '}
-              <span className="text-[#D63384]">local-first</span>, and{' '}
-              <span className="text-[#5DD3D3]">transparent</span>.
-            </p>
-          </div>
+      <section className="mx-auto w-full max-w-5xl px-6 py-8 md:py-10">
+        <SectionHeading>What RepOS Gives You</SectionHeading>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {features.map((feature) => (
+            <article
+              key={feature.title}
+              className="rounded-lg border border-[#3D4451] bg-[#141A21]/62 p-5 shadow-[0_18px_46px_rgba(0,0,0,0.18)]"
+            >
+              <IconFrame className={feature.color}>{feature.icon}</IconFrame>
+              <h3 className={`text-sm font-semibold ${feature.color}`}>{feature.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-[#C8C8C8]">{feature.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="mx-auto w-full max-w-3xl px-6">
-        <div className="flex items-center gap-4 opacity-0 animate-fade-in animation-delay-300">
-          <div className="flex-1 h-px bg-[#3D4451]" />
-          <div className="flex gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#F5C842]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#D63384]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#5DD3D3]" />
-          </div>
-          <div className="flex-1 h-px bg-[#3D4451]" />
-        </div>
-      </div>
+      <SectionSeparator align="center" />
 
-      {/* How It Works Section */}
-      <section className="mx-auto w-full max-w-3xl px-6 py-12 md:py-16">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-[#D63384] text-base md:text-lg mb-7 flex items-center gap-3 font-medium opacity-0 animate-fade-in animation-delay-300">
-            <span className="text-[#F5C842] font-normal">{'>'}</span>
-            How It Works
-          </h2>
-
-          <div className="mt-4">
-            <p className="text-xs uppercase tracking-wider text-[#8B9199] text-center">
-              Install &amp; run
+      <section className="mx-auto w-full max-w-5xl px-6 py-8 md:py-10">
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div id="workflow">
+            <SectionHeading>Start A Workflow</SectionHeading>
+            <p className="max-w-sm text-sm leading-7 text-[#C8C8C8]">
+              Install the CLI, open RepOS, and choose whether the command set belongs everywhere or
+              only inside the current project.
             </p>
-
-            <pre className="mt-3 overflow-x-auto rounded-xl border border-[#3D4451] bg-[#23272E] p-4 text-sm leading-relaxed">
-              <code>
-                <span className="text-[#8B9199]">$</span> pip install{' '}
-                <span className="text-[#F5C842]">repos-cli</span>
-                {'\n'}
-                <span className="text-[#8B9199]">$</span>{' '}
-                <span className="text-[#5DD3D3]">repos-cli</span>{' '}
-                <span className="text-[#8B9199]"># global db</span>
-                {'\n'}
-                <span className="text-[#8B9199]">$</span>{' '}
-                <span className="text-[#5DD3D3]">repos-cli init</span>{' '}
-                <span className="text-[#8B9199]"># per-project db</span>
-              </code>
-            </pre>
           </div>
+
+          <TerminalBlock className="self-center">
+            <span className="text-[#8B9199]">$</span> pip install <span className="text-[#F5C842]">repos-cli</span>
+            {'\n'}
+            <span className="text-[#8B9199]">$</span> <span className="text-[#5DD3D3]">repos-cli</span>{' '}
+            <span className="text-[#8B9199]"># global workspace</span>
+            {'\n'}
+            <span className="text-[#8B9199]">$</span> <span className="text-[#5DD3D3]">repos-cli init</span>{' '}
+            <span className="text-[#8B9199]"># project workspace</span>
+          </TerminalBlock>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="mx-auto w-full max-w-3xl px-6">
-        <div className="flex items-center gap-4">
-          <div className="flex-1 h-px bg-[#3D4451]" />
-          <div className="flex gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#5DD3D3]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#F5C842]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#D63384]" />
-          </div>
-        </div>
-      </div>
+      <SectionSeparator align="right" />
 
-      {/* Get RepOS Section */}
-      <section className="mx-auto w-full max-w-3xl px-6 py-12 md:py-16">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-[#D63384] text-base md:text-lg mb-9 flex items-center gap-3 font-medium">
-            <span className="text-[#F5C842] font-normal">{'>'}</span>
-            Get RepOS
-          </h2>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* GitHub Button */}
-            <a
-              href="https://github.com/trifactoria/repos-cli"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-5 py-2.5 bg-[#3D4451] border border-[#5DD3D3]/60 hover:border-[#5DD3D3] hover:bg-[#5DD3D3] hover:text-[#2D3239] transition-all duration-200 text-[#5DD3D3] text-sm rounded-lg"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fillRule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="font-medium">View on GitHub</span>
-            </a>
-
-            {/* PyPI Button */}
-            <a
-              href="https://pypi.org/project/repos-cli/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-5 py-2.5 bg-[#3D4451] border border-[#F5C842]/60 hover:border-[#F5C842] hover:bg-[#F5C842] hover:text-[#2D3239] transition-all duration-200 text-[#F5C842] text-sm rounded-lg"
-            >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12.042 0l-.28.039-6.01 1.592L3.998 2.09v7.903l-2.004.533v8.06l6.263 1.66.282.04.276-.04 6.269-1.66V10.66l-2.009-.533 2.009-.533V2.09L13.27 1.63zm.558 2.343v5.67l-4.524 1.2V3.542zm-5.082.653v5.684L3.45 9.982V4.297zm4.524 6.893l4.068 1.079v5.683l-4.068 1.077zm-5.082.653l4.524 1.2v5.671l-4.524-1.2z" />
-              </svg>
-              <span className="font-medium">Install via PyPI</span>
-            </a>
-          </div>
-
-          {/* Sponsor Link */}
-          <div className="mt-7 text-center">
-            <a
-              href="https://github.com/sponsors/trifactoria/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#D63384]/80 hover:text-[#D63384] transition-colors text-xs"
-            >
-              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-              </svg>
-              <span>Sponsor development</span>
-            </a>
-          </div>
+      <section id="architecture" className="mx-auto w-full max-w-5xl px-6 py-8 md:py-10">
+        <SectionHeading>Built For Terminal Work</SectionHeading>
+        <div className="grid gap-6 md:grid-cols-3">
+          {architecture.map((item) => (
+            <article key={item.title}>
+              <IconFrame className={item.color}>{item.icon}</IconFrame>
+              <h3 className={`text-sm font-semibold ${item.color}`}>{item.title}</h3>
+              <p className="mt-3 max-w-[13rem] text-xs leading-6 text-[#C8C8C8]">{item.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Spacer */}
-      <div className="flex-1" />
+      <SectionSeparator align="center" />
 
-      {/* Footer */}
+      <section className="mx-auto w-full max-w-5xl px-6 py-8 md:py-10">
+        <div className="grid gap-8 lg:grid-cols-3">
+          <article className="border-r-0 border-[#3D4451] lg:border-r lg:pr-8">
+            <div className="mb-3 flex items-center gap-3 text-[#5DD3D3] [&>svg]:h-7 [&>svg]:w-7">
+              <HomeIcon />
+              <h2 className="text-base font-semibold md:text-lg">Local-First By Default</h2>
+            </div>
+            <div className="grid gap-4 text-sm leading-7 text-[#C8C8C8]">
+              <p>Your command workflow stays close to the machine and project where you use it.</p>
+              <p>RepOS is designed around explicit scopes, visible commands, and terminal-native habits.</p>
+            </div>
+          </article>
+
+          <article className="border-r-0 border-[#3D4451] lg:border-r lg:pr-8">
+            <div className="mb-3 flex items-center gap-3 text-[#F5C842]">
+              <span className="text-2xl leading-none">{'{}'}</span>
+              <h2 className="text-base font-semibold md:text-lg">Why Not Just Aliases?</h2>
+            </div>
+            <div className="grid gap-4 text-sm leading-7 text-[#C8C8C8]">
+              <p>Aliases are great until they spread across profiles, snippets, and project notes.</p>
+              <p>RepOS gives them a focused home with context, structure, and recall.</p>
+            </div>
+          </article>
+
+          <article>
+            <div className="mb-3 flex items-center gap-3 text-[#D63384] [&>svg]:h-7 [&>svg]:w-7">
+              <RocketIcon />
+              <h2 className="text-base font-semibold md:text-lg">Product Direction</h2>
+            </div>
+            <ul className="grid gap-2 text-sm leading-6 text-[#C8C8C8]">
+              {roadmap.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#D63384]" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <SectionSeparator />
+
+      <section id="get" className="mx-auto w-full max-w-5xl px-6 py-8 md:py-10">
+        <h2 className="mb-5 text-center text-xl font-semibold text-[#D63384] md:text-2xl">
+          <span className="text-[#F5C842]">{'>'}</span> Get RepOS
+        </h2>
+        <div className="grid gap-4 lg:grid-cols-[1fr_12rem_12rem] lg:items-center">
+          <TerminalBlock className="min-h-14">
+            <span className="text-[#8B9199]">$</span> pip install <span className="text-[#F5C842]">repos-cli</span>
+          </TerminalBlock>
+          <a
+            href="https://github.com/trifactoria/repos-cli"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-[#5DD3D3]/70 bg-[#141A21]/70 px-5 text-sm font-semibold text-[#5DD3D3] hover:bg-[#5DD3D3] hover:text-[#2D3239]"
+          >
+            <GitHubIcon />
+            View on GitHub
+          </a>
+          <a
+            href="https://pypi.org/project/repos-cli/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-[#F5C842]/70 bg-[#141A21]/70 px-5 text-sm font-semibold text-[#F5C842] hover:bg-[#F5C842] hover:text-[#2D3239]"
+          >
+            <span aria-hidden="true">{'&'}</span>
+            PyPI package
+          </a>
+        </div>
+
+        <div className="mt-8 text-center">
+          <a
+            href="https://github.com/sponsors/trifactoria/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs text-[#D63384] hover:text-[#E8E8E8]"
+          >
+            <span aria-hidden="true">&lt;3</span>
+            Sponsor development
+          </a>
+        </div>
+      </section>
+
       <footer className="border-t border-[#3D4451]">
-        <div className="mx-auto w-full max-w-3xl px-6 py-6">
-          <p className="text-center text-xs text-[#8B9199]">
+        <div className="mx-auto w-full max-w-5xl px-6 py-6">
+          <p className="text-center text-xs leading-6 text-[#8B9199]">
             RepOS is a product of{' '}
             <a
               href="https://www.skillkraftz.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#D63384] hover:text-[#D63384]/80 transition-colors"
+              className="text-[#D63384] hover:text-[#E8E8E8]"
             >
               SkillKraftz LLC
             </a>
@@ -208,7 +456,7 @@ export default function Home() {
               href="https://www.trifactoria.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#5DD3D3] hover:text-[#5DD3D3]/80 transition-colors"
+              className="text-[#5DD3D3] hover:text-[#E8E8E8]"
             >
               TriFactoria Labs
             </a>{' '}
@@ -216,6 +464,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
