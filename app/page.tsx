@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
+import { TrackedLink } from './tracked-link';
 
 const features = [
   {
@@ -214,69 +215,93 @@ function RocketIcon() {
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#2D3239] text-[#E8E8E8]">
-      <header className="mx-auto w-full max-w-5xl px-6 pb-10 pt-6 md:pb-12">
-        <nav className="mb-7 flex items-center justify-between gap-4 text-xs text-[#E8E8E8]">
-          <a href="#top" className="text-[#5DD3D3] hover:text-[#E8E8E8]">
+      <header className="mx-auto w-full max-w-5xl px-5 pb-8 pt-5 sm:px-6 sm:pb-10 sm:pt-6 md:pb-12">
+        <nav className="mb-6 flex items-center justify-between gap-4 text-xs text-[#E8E8E8] sm:mb-7">
+          <TrackedLink
+            href="#top"
+            analyticsEvent="click_nav_repos_cli"
+            analyticsLocation="nav"
+            className="text-[#5DD3D3] hover:text-[#E8E8E8]"
+          >
             repos-cli
-          </a>
-          <div className="flex items-center gap-5 md:gap-8">
-            <a href="#workflow" className="hover:text-[#5DD3D3]">
+          </TrackedLink>
+          <div className="flex items-center gap-4 sm:gap-5 md:gap-8">
+            <TrackedLink
+              href="#workflow"
+              analyticsEvent="click_nav_workflow"
+              analyticsLocation="nav"
+              className="hover:text-[#5DD3D3]"
+            >
               workflow
-            </a>
-            <a href="#architecture" className="hover:text-[#5DD3D3]">
+            </TrackedLink>
+            <TrackedLink
+              href="#architecture"
+              analyticsEvent="click_nav_architecture"
+              analyticsLocation="nav"
+              className="hover:text-[#5DD3D3]"
+            >
               architecture
-            </a>
-            <a href="#get" className="hover:text-[#5DD3D3]">
+            </TrackedLink>
+            <TrackedLink
+              href="#get"
+              analyticsEvent="click_nav_install"
+              analyticsLocation="nav"
+              className="hover:text-[#5DD3D3]"
+            >
               install
-            </a>
+            </TrackedLink>
           </div>
         </nav>
 
         <div id="top">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-[#3D4451] bg-[#141A21]/70 px-3 py-2 text-xs text-[#E8E8E8] shadow-[0_12px_36px_rgba(0,0,0,0.18)]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-[#3D4451] bg-[#141A21]/70 px-3 py-2 text-xs text-[#E8E8E8] shadow-[0_12px_36px_rgba(0,0,0,0.18)] sm:mb-6">
             <span className="h-2.5 w-2.5 rounded-full bg-[#D63384]" />
             <span>Python package for terminal workflows</span>
           </div>
 
-          <div className="mb-8 rounded-xl bg-white p-4 shadow-[0_22px_80px_rgba(0,0,0,0.32)] md:p-7">
+          <div className="mx-auto mb-6 max-w-[22rem] rounded-xl bg-white p-3 shadow-[0_22px_80px_rgba(0,0,0,0.32)] sm:mb-8 sm:max-w-none sm:p-4 md:p-7">
             <Image src="/logo.png" alt="RepOS" width={814} height={276} priority className="mx-auto h-auto w-full max-w-3xl" />
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
-            <div>
-              <h1 className="max-w-md text-3xl font-normal leading-[1.55] md:text-[2.45rem]">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
+            <div className="w-full">
+              <h1 className="w-full max-w-none text-2xl font-normal leading-[1.45] sm:text-3xl sm:leading-[1.55] md:text-[2.45rem] lg:max-w-md">
                 A cleaner command center for developers who live in the{' '}
                 <span className="text-[#D63384]">terminal.</span>
               </h1>
 
-              <p className="mt-5 max-w-md text-sm leading-7 text-[#C8C8C8]">
+              <p className="mt-4 w-full max-w-none text-sm leading-7 text-[#C8C8C8] sm:mt-5 lg:max-w-md">
                 Organize repeatable commands, save aliases, and switch contexts without turning
                 dotfiles into a command database.
               </p>
 
-              <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <a
+              <div className="mt-7 flex w-full flex-col gap-3 min-[430px]:flex-row min-[430px]:items-center min-[430px]:justify-center sm:mt-9 sm:gap-4 lg:w-auto lg:justify-start">
+                <TrackedLink
                   href="https://pypi.org/project/repos-cli/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 w-full items-center justify-center rounded-lg border border-[#F5C842]/80 bg-[#F5C842] px-5 text-sm font-semibold text-[#2D3239] shadow-[0_12px_34px_rgba(245,200,66,0.16)] hover:border-[#F5C842] hover:bg-[#f7d45f] sm:w-[13.25rem]"
+                  analyticsEvent="click_install_repos_cli"
+                  analyticsLocation="hero"
+                  className="inline-flex h-12 w-full items-center justify-center whitespace-nowrap rounded-lg border border-[#F5C842]/80 bg-[#F5C842] px-5 text-sm font-semibold text-[#2D3239] shadow-[0_12px_34px_rgba(245,200,66,0.16)] hover:border-[#F5C842] hover:bg-[#f7d45f] min-[430px]:flex-1 sm:w-[13.25rem] sm:flex-none"
                 >
                   <span className="mr-2 text-[#2D3239]/75">{'>'}</span>
                   pip install repos-cli
-                </a>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href="https://github.com/trifactoria/repos-cli"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-[#5DD3D3]/70 bg-[#141A21]/70 px-5 text-sm font-semibold text-[#5DD3D3] hover:bg-[#5DD3D3] hover:text-[#2D3239] sm:w-[10.75rem]"
+                  analyticsEvent="click_view_source"
+                  analyticsLocation="hero"
+                  className="inline-flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#5DD3D3]/70 bg-[#141A21]/70 px-5 text-sm font-semibold text-[#5DD3D3] hover:bg-[#5DD3D3] hover:text-[#2D3239] min-[430px]:flex-1 sm:w-[10.75rem] sm:flex-none"
                 >
                   <GitHubIcon />
                   View source
-                </a>
+                </TrackedLink>
               </div>
             </div>
 
-            <div className="rounded-xl border border-[#64707f]/70 bg-[#10161D]/85 p-2 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+            <div className="w-full rounded-xl border border-[#64707f]/70 bg-[#10161D]/85 p-2 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
               <div className="flex items-center gap-2 border-b border-[#3D4451] px-3 py-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#D63384]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#F5C842]" />
@@ -406,36 +431,42 @@ export default function Home() {
           <TerminalBlock className="min-h-14">
             <span className="text-[#8B9199]">$</span> pip install <span className="text-[#F5C842]">repos-cli</span>
           </TerminalBlock>
-          <a
+          <TrackedLink
             href="https://github.com/trifactoria/repos-cli"
             target="_blank"
             rel="noopener noreferrer"
+            analyticsEvent="click_github"
+            analyticsLocation="bottom_cta"
             className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-[#5DD3D3]/70 bg-[#141A21]/70 px-5 text-sm font-semibold text-[#5DD3D3] hover:bg-[#5DD3D3] hover:text-[#2D3239]"
           >
             <GitHubIcon />
             View on GitHub
-          </a>
-          <a
+          </TrackedLink>
+          <TrackedLink
             href="https://pypi.org/project/repos-cli/"
             target="_blank"
             rel="noopener noreferrer"
+            analyticsEvent="click_pypi"
+            analyticsLocation="bottom_cta"
             className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-lg border border-[#F5C842]/70 bg-[#141A21]/70 px-5 text-sm font-semibold text-[#F5C842] hover:bg-[#F5C842] hover:text-[#2D3239]"
           >
             <span aria-hidden="true">{'&'}</span>
             PyPI package
-          </a>
+          </TrackedLink>
         </div>
 
         <div className="mt-8 text-center">
-          <a
+          <TrackedLink
             href="https://github.com/sponsors/trifactoria/"
             target="_blank"
             rel="noopener noreferrer"
+            analyticsEvent="click_sponsor"
+            analyticsLocation="footer"
             className="inline-flex items-center gap-2 text-xs text-[#D63384] hover:text-[#E8E8E8]"
           >
             <span aria-hidden="true">&lt;3</span>
             Sponsor development
-          </a>
+          </TrackedLink>
         </div>
       </section>
 
@@ -443,23 +474,27 @@ export default function Home() {
         <div className="mx-auto w-full max-w-5xl px-6 py-6">
           <p className="text-center text-xs leading-6 text-[#8B9199]">
             RepOS is a product of{' '}
-            <a
+            <TrackedLink
               href="https://www.skillkraftz.com"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent="click_skillkraftz"
+              analyticsLocation="footer"
               className="text-[#D63384] hover:text-[#E8E8E8]"
             >
               SkillKraftz LLC
-            </a>
+            </TrackedLink>
             . Developed within the{' '}
-            <a
+            <TrackedLink
               href="https://www.trifactoria.com"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent="click_trifactoria"
+              analyticsLocation="footer"
               className="text-[#5DD3D3] hover:text-[#E8E8E8]"
             >
               TriFactoria Labs
-            </a>{' '}
+            </TrackedLink>{' '}
             studio.
           </p>
         </div>
